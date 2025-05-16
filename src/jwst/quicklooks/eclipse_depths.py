@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Module that contains the class to generate the eclipse depth output served via
+Module that contains the class to generate the eclipse depth quicklooks served via
 the Rocky Worlds website.
 
 Authors
@@ -14,41 +14,40 @@ import math
 from astropy.io import ascii
 from astropy.table import unique
 from bokeh.models import (
-    Band,
     ColumnDataSource,
-    Legend,
     Span,
     Whisker,
 )
-from bokeh.plotting import figure, show, output_file, save
-import numpy as np
+from bokeh.plotting import figure, show
 from pathlib import Path
 
-from src.jwst.quicklooks.quicklook_template import write_figure
+from src.quicklook_utils.quicklook_template import write_figure
 
 
 def plot_eclipse_depths(
-    eclipse_table_path, figure_out_path=None, plot_width=1600, plot_height=600
+    eclipse_table_path,
+    figure_out_path=None,
+    plot_height=600,
+    plot_width=1600,
 ):
     """Generate bokeh figure for eclipse depths. Plot is of eclipse depth
     values as a function of eclipse number. The eclipse table that these plots
-    are generated from can be genreated if one does not exist. See `rocky_worlds_utils.eclipse_utils.pull_eclipse_metadata.py`
+    are generated from can be genreated if one does not exist. See `src.eclipse_utils.pull_eclipse_metadata.py`
 
     Parameters
     ----------
     eclipse_depths_data : astropy.Table.table
         An astropy table containing all of the metadata associated with eclipse
         depths for the RWDDT.
-        See: `rocky_worlds_utils.eclipse_utils.pull_eclipse_metadata.eclipseDepthTable`
 
     figure_out_path : str
         Path to write out bokeh html file
 
-    plot_width : int
-        Plot width for bokeh figure
-
     plot_height : int
-        Plot width for bokeh figure
+        Plot width for bokeh figure (default: 600)
+
+    plot_width : int
+        Plot width for bokeh figure (default: 1600)
     """
 
     eclipse_data = ascii.read(

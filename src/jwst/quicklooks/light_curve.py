@@ -1,4 +1,4 @@
-"""Module that contains the class to generate the lightcurve output served via
+"""Module that contains the class to generate the lightcurve quicklooks served via
 the Rocky Worlds website.
 
 Authors
@@ -24,11 +24,14 @@ from bokeh.models import (
     Slider,
     Whisker,
 )
-from bokeh.plotting import figure, show, output_file, save
+from bokeh.plotting import figure, show
 from copy import deepcopy
 import numpy as np
 from pathlib import Path
 import xarray as xr
+
+
+from src.quicklook_utils.quicklook_template import write_figure
 
 
 class rockyWorldsLightCurve:
@@ -42,10 +45,10 @@ class rockyWorldsLightCurve:
             Path of Rocky Worlds light curve data product file (extension `lc.h5`)
 
         plot_height : int
-            Size of bokeh plot height (default)
+            Size of bokeh plot height (default: 600)
 
         plot_width : int
-            Size of bokeh plot width
+            Size of bokeh plot width (default: 1400)
         """
         self.filename = Path(filename)
         self.plot_width = plot_width
@@ -62,7 +65,7 @@ class rockyWorldsLightCurve:
         self.astro_model = self.data.astroModel[0].data
 
         # Interpolated data attributes
-        # NOTE: Data from HLSP sometimes are incomplete, this allows our models to be continuous
+        # NOTE: Data from HLSP sometimes are incomplete (NaNs), this allows our models to be continuous
         self.interp_time = self.interpolate_data(deepcopy(self.time))
         self.interp_full_model = self.interpolate_data(deepcopy(self.full_model))
         self.interp_astro_model = self.interpolate_data(deepcopy(self.astro_model))
@@ -217,7 +220,7 @@ class rockyWorldsLightCurve:
 
         return data
 
-    def run(self, plot_outname=None):
+    def run(self, figure_out_path=None):
         """Convenience method to build figure served in the Rocky Worlds Website.
 
         Parameters
@@ -238,8 +241,9 @@ class rockyWorldsLightCurve:
             stylesheets=[{".bk-tab": Styles(font_size="1.0rem")}],
         )
 
-        if plot_outname:
-            output_file(filename=plot_outname)
-            save(tabbed_plots)
+        if figure_out_path:
+            filename = self.filename.name.replace("h5", "ql.html")
+            full_file_path = Path(figure_out_path) / filename
+            write_figure(tabbed_plots, full_file_path)
         else:
             show(tabbed_plots)
