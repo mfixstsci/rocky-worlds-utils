@@ -1,14 +1,10 @@
 #! /usr/bin/env python
 """
-Utilities module for the Rocky Worlds DDT project.
+Archive utilities for querying MAST and NexSci.
 
 Authors
 -------
 - Mees Fix <<mfix@stsci.edu>>
-
-Use
----
->>> from rocky_worlds_utils.archive_utils import check_jwst_observations
 """
 
 from astroquery.ipac.nexsci.nasa_exoplanet_archive import NasaExoplanetArchive

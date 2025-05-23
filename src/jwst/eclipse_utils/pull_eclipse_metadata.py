@@ -3,13 +3,6 @@
 """
 This module contains class to collect all of the RWDDT eclipse depths metadata.
 
-Use
----
->>> from src.jwst.eclipse_utils.pull_eclipse_metadata import eclipseDepthTable
->>> eclipse_table = eclipseDepthTable("/path/to/table/all_rwddt_eclipse_depths.dat")
->>> eclipse_table.add_eclipse_data_to_table("/path/to/data/")
->>> eclipse_table.write()
-
 Authors
 -------
 - Mees Fix <<mfix@stsci.edu>>
