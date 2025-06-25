@@ -27,7 +27,7 @@ def write_figure(bokeh_figure, outfile):
                                 <head>
                                     <meta charset="utf-8">
                                     <title>Bokeh Plot</title>
-                                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald" />
+                                    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
                                     {{ resources }}
                                     {{ script }}
                                 </head>
@@ -42,17 +42,17 @@ def write_figure(bokeh_figure, outfile):
         json={
             "attrs": {
                 "Axis": {
-                    "axis_label_text_font": "Oswald",
-                    "major_label_text_font": "Oswald",
+                    "axis_label_text_font": "Montserrat",
+                    "major_label_text_font": "Montserrat",
                 },
                 "Title": {
-                    "text_font": "Oswald",
+                    "text_font": "Montserrat",
                 },
                 "Legend": {
-                    "label_text_font": "Oswald",
+                    "label_text_font": "Montserrat",
                 },
                 "Label": {
-                    "text_font": "Oswald",
+                    "text_font": "Montserrat",
                 },
             }
         }
