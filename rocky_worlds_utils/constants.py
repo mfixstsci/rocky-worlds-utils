@@ -19,3 +19,7 @@ SELECTED_TARGETS = [
     "HD 260655 c",
     "TOI-244 b",
 ]
+
+PROGRAMS_BY_OBSERVATORY = {"hst": [17904], "jwst": [9235]}
+
+PROGRAMS_BY_TARGET = {"GJ 3929 b": {"hst": [17904], "jwst": [9235]}}
